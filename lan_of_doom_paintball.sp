@@ -56,27 +56,33 @@ public void OnPluginStart() {
 }
 
 public void OnMapStart() {
-  g_decal_indices[0] = PrecacheDecal("materials/spb/spb_shot1.vmt", true);
+  g_decal_indices[0] = PrecacheDecal("spb/spb_shot1.vmt", true);
+  PrecacheDecal("spb/spb_shot1.vmf", true);
   AddFileToDownloadsTable("materials/spb/spb_shot1.vmt");
   AddFileToDownloadsTable("materials/spb/spb_shot1.vtf");
 
-  g_decal_indices[1] = PrecacheDecal("materials/spb/spb_shot2.vmt", true);
+  g_decal_indices[1] = PrecacheDecal("spb/spb_shot2.vmt", true);
+  PrecacheDecal("spb/spb_shot2.vmf", true);
   AddFileToDownloadsTable("materials/spb/spb_shot2.vmt");
   AddFileToDownloadsTable("materials/spb/spb_shot2.vtf");
 
-  g_decal_indices[2] = PrecacheDecal("materials/spb/spb_shot3.vmt", true);
+  g_decal_indices[2] = PrecacheDecal("spb/spb_shot3.vmt", true);
+  PrecacheDecal("spb/spb_shot3.vmf", true);
   AddFileToDownloadsTable("materials/spb/spb_shot3.vmt");
   AddFileToDownloadsTable("materials/spb/spb_shot3.vtf");
 
-  g_decal_indices[3] = PrecacheDecal("materials/spb/spb_shot5.vmt", true);
+  g_decal_indices[3] = PrecacheDecal("spb/spb_shot5.vmt", true);
+  PrecacheDecal("spb/spb_shot5.vmf", true);
   AddFileToDownloadsTable("materials/spb/spb_shot5.vmt");
   AddFileToDownloadsTable("materials/spb/spb_shot5.vtf");
 
-  g_decal_indices[4] = PrecacheDecal("materials/spb/spb_shot6.vmt", true);
+  g_decal_indices[4] = PrecacheDecal("spb/spb_shot6.vmt", true);
+  PrecacheDecal("spb/spb_shot6.vmf", true);
   AddFileToDownloadsTable("materials/spb/spb_shot6.vmt");
   AddFileToDownloadsTable("materials/spb/spb_shot6.vtf");
 
-  g_decal_indices[5] = PrecacheDecal("materials/spb/spb_shot7.vmt", true);
+  g_decal_indices[5] = PrecacheDecal("spb/spb_shot7.vmt", true);
+  PrecacheDecal("spb/spb_shotf.vmt", true);
   AddFileToDownloadsTable("materials/spb/spb_shot7.vmt");
   AddFileToDownloadsTable("materials/spb/spb_shot7.vtf");
 
