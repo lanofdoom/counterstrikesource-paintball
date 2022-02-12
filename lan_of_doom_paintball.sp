@@ -37,7 +37,7 @@ static Action OnBulletImpact(Handle event, const char[] name,
                      kDecalBrightness);
   TE_SendToAll();
 
-  PrintToServer("TE_SetupGlowSprite((%f, %f, %f), %d, %d, %f, %d)", xyz[0],
+  PrintToServer("TE_SetupGlowSprite((%f, %f, %f), %d, %f, %f, %d)", xyz[0],
                 xyz[1], xyz[2], g_decal_indices[index], kDecalLife, kDecalSize,
                 kDecalBrightness);
 
@@ -56,27 +56,27 @@ public void OnPluginStart() {
 }
 
 public void OnMapStart() {
-  g_decal_indices[0] = PrecacheDecal("spb/spb_shot1.vmt", true);
+  g_decal_indices[0] = PrecacheDecal("materials/spb/spb_shot1.vmt", true);
   AddFileToDownloadsTable("materials/spb/spb_shot1.vmt");
   AddFileToDownloadsTable("materials/spb/spb_shot1.vtf");
 
-  g_decal_indices[1] = PrecacheDecal("spb/spb_shot2.vmt", true);
+  g_decal_indices[1] = PrecacheDecal("materials/spb/spb_shot2.vmt", true);
   AddFileToDownloadsTable("materials/spb/spb_shot2.vmt");
   AddFileToDownloadsTable("materials/spb/spb_shot2.vtf");
 
-  g_decal_indices[2] = PrecacheDecal("spb/spb_shot3.vmt", true);
+  g_decal_indices[2] = PrecacheDecal("materials/spb/spb_shot3.vmt", true);
   AddFileToDownloadsTable("materials/spb/spb_shot3.vmt");
   AddFileToDownloadsTable("materials/spb/spb_shot3.vtf");
 
-  g_decal_indices[3] = PrecacheDecal("spb/spb_shot5.vmt", true);
+  g_decal_indices[3] = PrecacheDecal("materials/spb/spb_shot5.vmt", true);
   AddFileToDownloadsTable("materials/spb/spb_shot5.vmt");
   AddFileToDownloadsTable("materials/spb/spb_shot5.vtf");
 
-  g_decal_indices[4] = PrecacheDecal("spb/spb_shot6.vmt", true);
+  g_decal_indices[4] = PrecacheDecal("materials/spb/spb_shot6.vmt", true);
   AddFileToDownloadsTable("materials/spb/spb_shot6.vmt");
   AddFileToDownloadsTable("materials/spb/spb_shot6.vtf");
 
-  g_decal_indices[5] = PrecacheDecal("spb/spb_shot7.vmt", true);
+  g_decal_indices[5] = PrecacheDecal("materials/spb/spb_shot7.vmt", true);
   AddFileToDownloadsTable("materials/spb/spb_shot7.vmt");
   AddFileToDownloadsTable("materials/spb/spb_shot7.vtf");
 
