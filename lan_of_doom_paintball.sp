@@ -15,7 +15,7 @@ static bool g_decals_indices_valid = false;
 
 static const int kDecalBrightness = 255;
 static const float kDecalLife = 2.0;
-static const float kDecalSize = 1.0;
+static const float kDecalSize = 0.0;
 
 //
 // Hooks
@@ -36,6 +36,10 @@ static Action OnBulletImpact(Handle event, const char[] name,
   TE_SetupGlowSprite(xyz, g_decal_indices[index], kDecalLife, kDecalSize,
                      kDecalBrightness);
   TE_SendToAll();
+
+  PrintToServer("TE_SetupGlowSprite((%f, %f, %f), %d, %d, %f, %d)", xyz[0],
+                xyz[1], xyz[2], g_decal_indices[index], kDecalLife, kDecalSize,
+                kDecalBrightness);
 
   return Plugin_Continue;
 }
