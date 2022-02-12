@@ -18,15 +18,6 @@ static const float kDecalLife = 2.0;
 static const float kDecalSize = 1.0;
 
 //
-// Logic
-//
-
-int RegisterDecal(const char[] path) {
-  AddFileToDownloadsTable(path);
-  return PrecacheDecal(path, true);
-}
-
-//
 // Hooks
 //
 
@@ -61,11 +52,29 @@ public void OnPluginStart() {
 }
 
 public void OnMapStart() {
-  g_decal_indices[0] = RegisterDecal("materials/spb/spb_shot1.vmt");
-  g_decal_indices[1] = RegisterDecal("materials/spb/spb_shot2.vmt");
-  g_decal_indices[2] = RegisterDecal("materials/spb/spb_shot3.vmt");
-  g_decal_indices[3] = RegisterDecal("materials/spb/spb_shot5.vmt");
-  g_decal_indices[4] = RegisterDecal("materials/spb/spb_shot6.vmt");
-  g_decal_indices[5] = RegisterDecal("materials/spb/spb_shot7.vmt");
+  g_decal_indices[0] = PrecacheDecal("spb/spb_shot1.vmt", true);
+  AddFileToDownloadsTable("materials/spb/spb_shot1.vmt");
+  AddFileToDownloadsTable("materials/spb/spb_shot1.vtf");
+
+  g_decal_indices[1] = PrecacheDecal("spb/spb_shot2.vmt", true);
+  AddFileToDownloadsTable("materials/spb/spb_shot2.vmt");
+  AddFileToDownloadsTable("materials/spb/spb_shot2.vtf");
+
+  g_decal_indices[2] = PrecacheDecal("spb/spb_shot3.vmt", true);
+  AddFileToDownloadsTable("materials/spb/spb_shot3.vmt");
+  AddFileToDownloadsTable("materials/spb/spb_shot3.vtf");
+
+  g_decal_indices[3] = PrecacheDecal("spb/spb_shot5.vmt", true);
+  AddFileToDownloadsTable("materials/spb/spb_shot5.vmt");
+  AddFileToDownloadsTable("materials/spb/spb_shot5.vtf");
+
+  g_decal_indices[4] = PrecacheDecal("spb/spb_shot6.vmt", true);
+  AddFileToDownloadsTable("materials/spb/spb_shot6.vmt");
+  AddFileToDownloadsTable("materials/spb/spb_shot6.vtf");
+
+  g_decal_indices[5] = PrecacheDecal("spb/spb_shot7.vmt", true);
+  AddFileToDownloadsTable("materials/spb/spb_shot7.vmt");
+  AddFileToDownloadsTable("materials/spb/spb_shot7.vtf");
+
   g_decals_indices_valid = true;
 }
