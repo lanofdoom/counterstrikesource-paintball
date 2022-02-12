@@ -13,10 +13,6 @@ static ConVar g_paintball_mode_enabled_cvar;
 static int g_decal_indices[NUM_INDICES];
 static bool g_decals_indices_valid = false;
 
-static const int kDecalBrightness = 255;
-static const float kDecalLife = 2.0;
-static const float kDecalSize = 0.0;
-
 //
 // Hooks
 //
@@ -33,13 +29,14 @@ static Action OnBulletImpact(Handle event, const char[] name,
   xyz[2] = GetEventFloat(event, "z");
 
   int index = GetRandomInt(0, NUM_INDICES - 1);
-  TE_SetupGlowSprite(xyz, g_decal_indices[index], kDecalLife, kDecalSize,
-                     kDecalBrightness);
+
+  TE_Start("World Decal");
+  TE_WriteVector("m_vecOrigin", xyz);
+  TE_WriteNum("m_nIndex", g_decal_indices[index]);
   TE_SendToAll();
 
-  PrintToServer("TE_SetupGlowSprite((%f, %f, %f), %d, %f, %f, %d)", xyz[0],
-                xyz[1], xyz[2], g_decal_indices[index], kDecalLife, kDecalSize,
-                kDecalBrightness);
+  PrintToServer("World Decal((%f, %f, %f), %d)", xyz[0],
+                xyz[1], xyz[2], g_decal_indices[index]);
 
   return Plugin_Continue;
 }
