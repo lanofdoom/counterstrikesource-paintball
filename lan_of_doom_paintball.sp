@@ -51,11 +51,11 @@ public void OnPluginStart() {
 }
 
 public void OnMapStart() {
-  g_decal_indices[0] = PrecacheDecal("spb/spb_shot1");
-  g_decal_indices[1] = PrecacheDecal("spb/spb_shot2");
-  g_decal_indices[2] = PrecacheDecal("spb/spb_shot3");
-  g_decal_indices[3] = PrecacheDecal("spb/spb_shot5");
-  g_decal_indices[4] = PrecacheDecal("spb/spb_shot6");
-  g_decal_indices[5] = PrecacheDecal("spb/spb_shot7");
+  g_decal_indices[0] = PrecacheDecal("spb/spb_shot1.vmt");
+  g_decal_indices[1] = PrecacheDecal("spb/spb_shot2.vmt");
+  g_decal_indices[2] = PrecacheDecal("spb/spb_shot3.vmt");
+  g_decal_indices[3] = PrecacheDecal("spb/spb_shot5.vmt");
+  g_decal_indices[4] = PrecacheDecal("spb/spb_shot6.vmt");
+  g_decal_indices[5] = PrecacheDecal("spb/spb_shot7.vmt");
   g_decals_indices_valid = true;
 }
