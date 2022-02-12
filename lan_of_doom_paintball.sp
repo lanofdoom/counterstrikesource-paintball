@@ -24,9 +24,10 @@ static const float kDecalSize = 0.0;
 static Action OnBulletImpact(Handle event, const char[] name,
                              bool dontBroadcast) {
   if (!g_paintball_mode_enabled_cvar.BoolValue || !g_decals_indices_valid) {
+    PrintToServer("OnBulletImpact False");
     return Plugin_Continue;
   }
-
+  PrintToServer("OnBulletImpact True");
   float xyz[3];
   xyz[0] = GetEventFloat(event, "x");
   xyz[1] = GetEventFloat(event, "y");
@@ -57,5 +58,6 @@ public void OnMapStart() {
   g_decal_indices[3] = PrecacheDecal("materials/spb/spb_shot5.vmt", true);
   g_decal_indices[4] = PrecacheDecal("materials/spb/spb_shot6.vmt", true);
   g_decal_indices[5] = PrecacheDecal("materials/spb/spb_shot7.vmt", true);
+  PrintToServer("OnMapStart: %d %d", g_decal_indices[0], g_decal_indices[1]);
   g_decals_indices_valid = true;
 }
