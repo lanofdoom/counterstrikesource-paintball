@@ -18,16 +18,24 @@ static const float kDecalLife = 2.0;
 static const float kDecalSize = 0.0;
 
 //
+// Logic
+//
+
+int RegisterDecal(const char[] path) {
+  AddFileToDownloadsTable(path);
+  return PrecacheDecal(path, true);
+}
+
+//
 // Hooks
 //
 
 static Action OnBulletImpact(Handle event, const char[] name,
                              bool dontBroadcast) {
   if (!g_paintball_mode_enabled_cvar.BoolValue || !g_decals_indices_valid) {
-    PrintToServer("OnBulletImpact False");
     return Plugin_Continue;
   }
-  PrintToServer("OnBulletImpact True");
+
   float xyz[3];
   xyz[0] = GetEventFloat(event, "x");
   xyz[1] = GetEventFloat(event, "y");
@@ -52,12 +60,11 @@ public void OnPluginStart() {
 }
 
 public void OnMapStart() {
-  g_decal_indices[0] = PrecacheDecal("materials/spb/spb_shot1.vmt", true);
-  g_decal_indices[1] = PrecacheDecal("materials/spb/spb_shot2.vmt", true);
-  g_decal_indices[2] = PrecacheDecal("materials/spb/spb_shot3.vmt", true);
-  g_decal_indices[3] = PrecacheDecal("materials/spb/spb_shot5.vmt", true);
-  g_decal_indices[4] = PrecacheDecal("materials/spb/spb_shot6.vmt", true);
-  g_decal_indices[5] = PrecacheDecal("materials/spb/spb_shot7.vmt", true);
-  PrintToServer("OnMapStart: %d %d", g_decal_indices[0], g_decal_indices[1]);
+  g_decal_indices[0] = RegisterDecal("materials/spb/spb_shot1.vmt");
+  g_decal_indices[1] = RegisterDecal("materials/spb/spb_shot2.vmt");
+  g_decal_indices[2] = RegisterDecal("materials/spb/spb_shot3.vmt");
+  g_decal_indices[3] = RegisterDecal("materials/spb/spb_shot5.vmt");
+  g_decal_indices[4] = RegisterDecal("materials/spb/spb_shot6.vmt");
+  g_decal_indices[5] = RegisterDecal("materials/spb/spb_shot7.vmt");
   g_decals_indices_valid = true;
 }
