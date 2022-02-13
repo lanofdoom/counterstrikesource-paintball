@@ -13,9 +13,27 @@ static ConVar g_paintball_mode_enabled_cvar;
 static int g_decal_indices[NUM_INDICES];
 static bool g_decals_indices_valid = false;
 
-static const int kDecalBrightness = 255;
-static const float kDecalLife = 2.0;
-static const float kDecalSize = 1.0;
+//
+// Logic
+//
+
+int PrecacheAndAddToDownloads(const char[] path) {
+  char material[PLATFORM_MAX_PATH];
+  Format(material, PLATFORM_MAX_PATH, "materials/%s", path);
+  AddFileToDownloadsTable(material);
+
+  return PrecacheDecal(path, true);
+}
+
+int RegisterDecal(const char[] path) {
+  char vtf[PLATFORM_MAX_PATH];
+  Format(vtf, PLATFORM_MAX_PATH, "%s.vtf", path);
+  PrecacheAndAddToDownloads(vtf);
+
+  char vmt[PLATFORM_MAX_PATH];
+  Format(vmt, PLATFORM_MAX_PATH, "%s.vmt", path);
+  return PrecacheAndAddToDownloads(vmt);
+}
 
 //
 // Hooks
@@ -33,13 +51,11 @@ static Action OnBulletImpact(Handle event, const char[] name,
   xyz[2] = GetEventFloat(event, "z");
 
   int index = GetRandomInt(0, NUM_INDICES - 1);
-  TE_SetupGlowSprite(xyz, g_decal_indices[index], kDecalLife, kDecalSize,
-                     kDecalBrightness);
-  TE_SendToAll();
 
-  PrintToServer("TE_SetupGlowSprite((%f, %f, %f), %d, %f, %f, %d)", xyz[0],
-                xyz[1], xyz[2], g_decal_indices[index], kDecalLife, kDecalSize,
-                kDecalBrightness);
+  TE_Start("World Decal");
+  TE_WriteVector("m_vecOrigin", xyz);
+  TE_WriteNum("m_nIndex", g_decal_indices[index]);
+  TE_SendToAll();
 
   return Plugin_Continue;
 }
@@ -56,35 +72,11 @@ public void OnPluginStart() {
 }
 
 public void OnMapStart() {
-  g_decal_indices[0] = PrecacheDecal("spb/spb_shot1.vmt", true);
-  PrecacheDecal("spb/spb_shot1.vtf", true);
-  AddFileToDownloadsTable("materials/spb/spb_shot1.vmt");
-  AddFileToDownloadsTable("materials/spb/spb_shot1.vtf");
-
-  g_decal_indices[1] = PrecacheDecal("spb/spb_shot2.vmt", true);
-  PrecacheDecal("spb/spb_shot2.vtf", true);
-  AddFileToDownloadsTable("materials/spb/spb_shot2.vmt");
-  AddFileToDownloadsTable("materials/spb/spb_shot2.vtf");
-
-  g_decal_indices[2] = PrecacheDecal("spb/spb_shot3.vmt", true);
-  PrecacheDecal("spb/spb_shot3.vtf", true);
-  AddFileToDownloadsTable("materials/spb/spb_shot3.vmt");
-  AddFileToDownloadsTable("materials/spb/spb_shot3.vtf");
-
-  g_decal_indices[3] = PrecacheDecal("spb/spb_shot5.vmt", true);
-  PrecacheDecal("spb/spb_shot5.vtf", true);
-  AddFileToDownloadsTable("materials/spb/spb_shot5.vmt");
-  AddFileToDownloadsTable("materials/spb/spb_shot5.vtf");
-
-  g_decal_indices[4] = PrecacheDecal("spb/spb_shot6.vmt", true);
-  PrecacheDecal("spb/spb_shot6.vtf", true);
-  AddFileToDownloadsTable("materials/spb/spb_shot6.vmt");
-  AddFileToDownloadsTable("materials/spb/spb_shot6.vtf");
-
-  g_decal_indices[5] = PrecacheDecal("spb/spb_shot7.vmt", true);
-  PrecacheDecal("spb/spb_shotf.vtf", true);
-  AddFileToDownloadsTable("materials/spb/spb_shot7.vmt");
-  AddFileToDownloadsTable("materials/spb/spb_shot7.vtf");
-
+  g_decal_indices[0] = RegisterDecal("spb/spb_shot1");
+  g_decal_indices[1] = RegisterDecal("spb/spb_shot2");
+  g_decal_indices[2] = RegisterDecal("spb/spb_shot3");
+  g_decal_indices[3] = RegisterDecal("spb/spb_shot5");
+  g_decal_indices[4] = RegisterDecal("spb/spb_shot6");
+  g_decal_indices[5] = RegisterDecal("spb/spb_shot7");
   g_decals_indices_valid = true;
 }
