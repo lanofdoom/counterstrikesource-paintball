@@ -4,14 +4,12 @@
 public const Plugin myinfo = {
     name = "Paintball", author = "LAN of DOOM",
     description = "Replace your bullets with friendly paintballs!",
-    version = "1.0.0",
+    version = "0.8.0",
     url = "https://github.com/lanofdoom/counterstrikesource-paintball"};
 
 static ConVar g_paintball_mode_enabled_cvar;
 
-#define NUM_INDICES 6
-static int g_decal_indices[NUM_INDICES];
-static bool g_decals_indices_valid = false;
+static ArrayList g_decal_indices;
 
 //
 // Logic
@@ -41,7 +39,7 @@ int RegisterDecal(const char[] path) {
 
 static Action OnBulletImpact(Handle event, const char[] name,
                              bool dontBroadcast) {
-  if (!g_paintball_mode_enabled_cvar.BoolValue || !g_decals_indices_valid) {
+  if (!g_paintball_mode_enabled_cvar.BoolValue || g_decal_indices.Length == 0) {
     return Plugin_Continue;
   }
 
@@ -50,11 +48,11 @@ static Action OnBulletImpact(Handle event, const char[] name,
   xyz[1] = GetEventFloat(event, "y");
   xyz[2] = GetEventFloat(event, "z");
 
-  int index = GetRandomInt(0, NUM_INDICES - 1);
+  int index = GetRandomInt(0, g_decal_indices.Length - 1);
 
   TE_Start("World Decal");
   TE_WriteVector("m_vecOrigin", xyz);
-  TE_WriteNum("m_nIndex", g_decal_indices[index]);
+  TE_WriteNum("m_nIndex", g_decal_indices.Get(index));
   TE_SendToAll();
 
   return Plugin_Continue;
@@ -68,15 +66,28 @@ public void OnPluginStart() {
   g_paintball_mode_enabled_cvar = CreateConVar(
       "sm_paintball_mode_enabled", "1", "If true, paintball mode is enabled.");
 
+  g_decal_indices = CreateArray(1);
+
   HookEvent("bullet_impact", OnBulletImpact);
 }
 
 public void OnMapStart() {
-  g_decal_indices[0] = RegisterDecal("spb/spb_shot1");
-  g_decal_indices[1] = RegisterDecal("spb/spb_shot2");
-  g_decal_indices[2] = RegisterDecal("spb/spb_shot3");
-  g_decal_indices[3] = RegisterDecal("spb/spb_shot5");
-  g_decal_indices[4] = RegisterDecal("spb/spb_shot6");
-  g_decal_indices[5] = RegisterDecal("spb/spb_shot7");
-  g_decals_indices_valid = true;
+  g_decal_indices.Clear();
+  g_decal_indices.Push(RegisterDecal("paintball/pb_babyblue2"));
+  g_decal_indices.Push(RegisterDecal("paintball/pb_black"));
+  g_decal_indices.Push(RegisterDecal("paintball/pb_blue2"));
+  g_decal_indices.Push(RegisterDecal("paintball/pb_brown"));
+  g_decal_indices.Push(RegisterDecal("paintball/pb_cyan"));
+  g_decal_indices.Push(RegisterDecal("paintball/pb_dark_green"));
+  g_decal_indices.Push(RegisterDecal("paintball/pb_goldenrod"));
+  g_decal_indices.Push(RegisterDecal("paintball/pb_green"));
+  g_decal_indices.Push(RegisterDecal("paintball/pb_medslateblue"));
+  g_decal_indices.Push(RegisterDecal("paintball/pb_olive"));
+  g_decal_indices.Push(RegisterDecal("paintball/pb_orange"));
+  g_decal_indices.Push(RegisterDecal("paintball/pb_pink"));
+  g_decal_indices.Push(RegisterDecal("paintball/pb_red_orange"));
+  g_decal_indices.Push(RegisterDecal("paintball/pb_red2"));
+  g_decal_indices.Push(RegisterDecal("paintball/pb_violet"));
+  g_decal_indices.Push(RegisterDecal("paintball/pb_white2"));
+  g_decal_indices.Push(RegisterDecal("paintball/pb_yellow"));
 }
