@@ -1,6 +1,0 @@
-"DecalModulate"
-{
-	"$basetexture" "spb\spb_shot2"
-	"$decalscale" 0.14
-	"$decalDynamicScale" 1
-}
