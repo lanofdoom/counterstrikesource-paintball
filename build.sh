@@ -16,8 +16,8 @@ $tmp_dir/addons/sourcemod/scripting/spcomp lan_of_doom_paintball.sp
 
 mkdir -p build/addons/sourcemod/plugins
 mv lan_of_doom_paintball.smx build/addons/sourcemod/plugins/lan_of_doom_paintball.smx
-mkdir -p build/materials/spb
-cp materials/spb/* build/materials/spb/
+mkdir -p build/materials/paintball
+cp materials/paintball/* build/materials/paintball/
 cd build
 tar -czvf lan_of_doom_paintball.tar.gz materials addons
 rm -rf addons
