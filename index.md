@@ -1,37 +1,15 @@
-## Welcome to GitHub Pages
+## Releases
+* [Latest](https://lanofdoom.github.io/counterstrikesource-paintball/releases/latest/lan_of_doom_paintball.tar.gz) ([Source](https://lanofdoom.github.io/counterstrikesource-paintball/releases/latest/lan_of_doom_paintball_source.tar.gz)) (0.8.0)
+* [Nightly](https://lanofdoom.github.io/counterstrikesource-paintball/releases/nightly/lan_of_doom_paintball.tar.gz) ([Source](https://lanofdoom.github.io/counterstrikesource-paintball/releases/nightly/lan_of_doom_paintball_source.tar.gz))
 
-You can use the [editor on GitHub](https://github.com/lanofdoom/counterstrikesource-paintball/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+## Installation
+Extract ``lan_of_doom_paintball.tar.gz`` to your server's ``css/cstrike``
+directory.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Console Variables
+``sm_paintball_mode_enabled`` If ``1``, painball mode is enabled. ``1`` by
+default.
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/lanofdoom/counterstrikesource-paintball/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+## Version History
+### 0.8.0 ([Download](https://lanofdoom.github.io/counterstrikesource-paintball/releases/v0.8.0/lan_of_doom_paintball.tar.gz)) ([Source](https://lanofdoom.github.io/counterstrikesource-paintball/releases/v0.8.0/lan_of_doom_paintball_source.tar.gz)) 
+* Initial Release
