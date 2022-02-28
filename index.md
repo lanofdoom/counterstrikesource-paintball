@@ -1,5 +1,5 @@
 ## Releases
-* [Latest](https://lanofdoom.github.io/counterstrikesource-paintball/releases/latest/lan_of_doom_paintball.tar.gz) ([Source](https://lanofdoom.github.io/counterstrikesource-paintball/releases/latest/lan_of_doom_paintball_source.tar.gz)) (0.8.0)
+* [Latest](https://lanofdoom.github.io/counterstrikesource-paintball/releases/latest/lan_of_doom_paintball.tar.gz) ([Source](https://lanofdoom.github.io/counterstrikesource-paintball/releases/latest/lan_of_doom_paintball_source.tar.gz)) (0.9.0)
 * [Nightly](https://lanofdoom.github.io/counterstrikesource-paintball/releases/nightly/lan_of_doom_paintball.tar.gz) ([Source](https://lanofdoom.github.io/counterstrikesource-paintball/releases/nightly/lan_of_doom_paintball_source.tar.gz))
 
 ## Installation
@@ -11,5 +11,8 @@ directory.
 default.
 
 ## Version History
+### 0.9.0 ([Download](https://lanofdoom.github.io/counterstrikesource-paintball/releases/v0.8.0/lan_of_doom_paintball.tar.gz)) ([Source](https://lanofdoom.github.io/counterstrikesource-paintball/releases/v0.8.0/lan_of_doom_paintball_source.tar.gz)) 
+* Apply paintballs to more surfaces and only apply one paintball per shot
+
 ### 0.8.0 ([Download](https://lanofdoom.github.io/counterstrikesource-paintball/releases/v0.8.0/lan_of_doom_paintball.tar.gz)) ([Source](https://lanofdoom.github.io/counterstrikesource-paintball/releases/v0.8.0/lan_of_doom_paintball_source.tar.gz)) 
 * Initial Release
