@@ -1,10 +1,11 @@
+#include <sdkhooks>
 #include <sdktools>
 #include <sourcemod>
 
 public const Plugin myinfo = {
     name = "Paintball", author = "LAN of DOOM",
     description = "Replace your bullets with friendly paintballs!",
-    version = "0.8.0",
+    version = "0.9.0",
     url = "https://github.com/lanofdoom/counterstrikesource-paintball"};
 
 static ConVar g_paintball_mode_enabled_cvar;
@@ -15,7 +16,7 @@ static ArrayList g_decal_indices;
 // Logic
 //
 
-int PrecacheAndAddToDownloads(const char[] path) {
+static int PrecacheAndAddToDownloads(const char[] path) {
   char material[PLATFORM_MAX_PATH];
   Format(material, PLATFORM_MAX_PATH, "materials/%s", path);
   AddFileToDownloadsTable(material);
@@ -23,7 +24,7 @@ int PrecacheAndAddToDownloads(const char[] path) {
   return PrecacheDecal(path, true);
 }
 
-int RegisterDecal(const char[] path) {
+static int RegisterDecal(const char[] path) {
   char vtf[PLATFORM_MAX_PATH];
   Format(vtf, PLATFORM_MAX_PATH, "%s.vtf", path);
   PrecacheAndAddToDownloads(vtf);
@@ -37,25 +38,63 @@ int RegisterDecal(const char[] path) {
 // Hooks
 //
 
-static Action OnBulletImpact(Handle event, const char[] name,
-                             bool dontBroadcast) {
+static void OnBulletImpact(Handle event, const char[] name,
+                           bool dontBroadcast) {
   if (!g_paintball_mode_enabled_cvar.BoolValue || g_decal_indices.Length == 0) {
-    return Plugin_Continue;
+    return;
   }
 
-  float xyz[3];
-  xyz[0] = GetEventFloat(event, "x");
-  xyz[1] = GetEventFloat(event, "y");
-  xyz[2] = GetEventFloat(event, "z");
+  int tick_count = GetGameTickCount();
 
-  int index = GetRandomInt(0, g_decal_indices.Length - 1);
+  float hit_end_pos[3];
+  hit_end_pos[0] = GetEventFloat(event, "x");
+  hit_end_pos[1] = GetEventFloat(event, "y");
+  hit_end_pos[2] = GetEventFloat(event, "z");
+  int userid = GetEventInt(event, "userid");
+
+  static int last_tick_count = 0;
+  static int last_userid = 0;
+  if (tick_count == last_tick_count && userid == last_userid) {
+    return;
+  }
+
+  last_tick_count = tick_count;
+  last_userid = userid;
+
+  int decal_index = GetRandomInt(0, g_decal_indices.Length - 1);
+  int decal = g_decal_indices.Get(decal_index);
 
   TE_Start("World Decal");
-  TE_WriteVector("m_vecOrigin", xyz);
-  TE_WriteNum("m_nIndex", g_decal_indices.Get(index));
+  TE_WriteVector("m_vecOrigin", hit_end_pos);
+  TE_WriteNum("m_nIndex", decal);
   TE_SendToAll();
 
-  return Plugin_Continue;
+  int client = GetClientOfUserId(userid);
+  if (!client) {
+    return;
+  }
+
+  float client_pos[3];
+  GetClientEyePosition(client, client_pos);
+
+  float to_hit[3];
+  MakeVectorFromPoints(hit_end_pos, client_pos, to_hit);
+  NormalizeVector(to_hit, to_hit);
+
+  float from_hit[3];
+  from_hit[0] = to_hit[0];
+  from_hit[1] = to_hit[1];
+  from_hit[2] = to_hit[2];
+  NegateVector(from_hit);
+
+  float rotation[3]
+  GetVectorAngles(from_hit, rotation);
+
+  TE_Start("Projected Decal");
+  TE_WriteVector("m_vecOrigin", hit_end_pos);
+  TE_WriteVector("m_angRotation", rotation);
+  TE_WriteNum("m_nIndex", decal);
+  TE_SendToAll();
 }
 
 //
