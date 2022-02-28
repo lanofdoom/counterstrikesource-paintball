@@ -1,5 +1,5 @@
 # LAN of DOOM Paintball Mode
-A SourceMod plugin that respawns players after death for CS:S servers.
+A SourceMod plugin that enables paintball mode for CS:S servers.
 
 # Building
 Check out the repository and run the ``./build.sh`` script.
